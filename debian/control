@@ -1,0 +1,32 @@
+Source: golang-gocheck-dev
+Section: devel
+Priority: extra
+Maintainer: Sergio Schvezov <sergio.schvezov@canonical.com>
+Build-Depends: debhelper (>= 9), dh-golang, golang-go
+Standards-Version: 3.9.4
+Homepage: http://labix.org/gocheck
+Vcs-Browser: http://bazaar.launchpad.net/~niemeyer/gocheck/trunk/files
+Vcs-Bzr: lp:gocheck
+
+Package: golang-gocheck-dev
+Architecture: all
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Richer testing framework for Go libraries and applications to use
+ gocheck extends Go's internal testing library with features such as:
+ .
+    - Helpful error reporting to aid on figuring problems out
+    - Richer test helpers: assertions which interrupt the test immediately,
+      deep multi-type comparisons, string matching, etc
+    - Suite-based grouping of tests
+    - Fixtures: per suite and/or per test set up and tear down
+    - Benchmarks integrated in the suite logic (with fixtures, etc)
+    - Management of temporary directories
+    - Panic-catching logic, with proper error reporting
+    - Proper counting of successes, failures, panics, missed tests, skips, etc
+    - Explicit test skipping
+    - Support for expected failures
+    - Verbosity flag which disables output caching (helpful to debug
+      hanging tests, for instance)
+    - Multi-line string reporting for more comprehensible failures
+    - Inclusion of comments surrounding checks on failure reports
+    - Fully tested (it manages to test itself reliably)

@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Package names
+PKG_version     := $(shell dpkg-parsechangelog | sed -n 's/^Version: //p')
+PKG_source      := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
+UPS_version     := $(shell echo '$(PKG_version)' | sed 's/.*://; s/-[^-]*$$//')
+BZR_rev         := $(shell echo '$(UPS_version)' | sed 's/.*+//')
+BZR_repo        := lp:gocheck
+
+export DH_OPTIONS
+
+export DH_GOPKG := launchpad.net/gocheck
+
+get-packaged-orig-source:
+	rm -rf $(PKG_source)-$(UPS_version)
+	rm -f $(PKG_source)-$(UPS_version).orig.tar.gz
+	bzr checkout $(BZR_repo) $(PKG_source)-$(UPS_version)
+	cd $(PKG_source)-$(UPS_version) && bzr export \
+		--revision $(BZR_rev) \
+		../$(PKG_source)_$(UPS_version).orig.tar.gz
+	rm -rf $(PKG_source)-$(UPS_version)
+
+%:
+	dh $@ --buildsystem=golang --with=golang
